@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "682551476877",
+    "project_id": "crmmagiecbiz",
+    "storage_bucket": "crmmagiecbiz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682551476877:android:44ef46b580469db56898c4",
+        "android_client_info": {
+          "package_name": "com.magiecbiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBua3iyOEpxS_Uyc_PABiD4wknd5oCv53Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
