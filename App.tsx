@@ -119,11 +119,11 @@ const StackNav = () => {
   return (
     <Stack.Navigator
       screenOptions={({ navigation, route }) => ({
-        statusBarColor: '#f97316',
+        statusBarColor: '#c02221',
         headerTintColor: '#ffffff',
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: '#f97316',
+          backgroundColor: '#c02221',
         },
         headerLeft: () => {
           if (route.name === 'Home') {
@@ -383,13 +383,13 @@ const DrawerNav = ({ isAuthenticated }) => {
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
-        drawerActiveBackgroundColor: '#f97316',
+        drawerActiveBackgroundColor: '#c02221',
         drawerActiveTintColor: '#fff',
         drawerInactiveTintColor: '#333',
         headerTintColor: '#ffffff',
         headerTitleAlign: 'center',
         headerStyle: {
-          backgroundColor: '#f97316',
+          backgroundColor: '#c02221',
         },
         drawerLabelStyle: {
           marginLeft: -25,

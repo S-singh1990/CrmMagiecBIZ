@@ -23,7 +23,7 @@ const BottomNav = () => {
             <View
               style={[
                 styles.tabIconBg,
-                { backgroundColor: '#f97316' }
+                { backgroundColor: '#c02221' }
               ]}>
               <Image
                 source={require('../assets/images/home.png')}
@@ -45,7 +45,7 @@ const BottomNav = () => {
           >
             <View
               style={[
-                styles.tabIconBg, { backgroundColor: '#f97316' }
+                styles.tabIconBg, { backgroundColor: '#c02221' }
               ]}>
               <Image
                 source={require('../assets/images/all-leads.png')}
@@ -67,7 +67,7 @@ const BottomNav = () => {
           >
             <View
               style={[
-                styles.tabIconBg, { backgroundColor: '#f97316' }
+                styles.tabIconBg, { backgroundColor: '#c02221' }
               ]}>
               <Image
                 source={require('../assets/images/layers.png')}

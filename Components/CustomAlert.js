@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     okButton: {
-        backgroundColor: '#f97316',
+        backgroundColor: '#c02221',
         paddingVertical: 10,
         borderRadius: 5,
     },

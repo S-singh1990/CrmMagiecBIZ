@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     },
     mainHeading: {
         fontSize: 18,
-        color: "#f97316",
+        color: "#c02221",
         paddingTop: 20,
         paddingBottom: 3,
         textAlign: "center",

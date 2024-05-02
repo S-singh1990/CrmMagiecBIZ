@@ -928,7 +928,7 @@ const EditFollowup = () => {
                                             <View style={styles.FrameDtime}>
                                                 <View style={styles.btnCalender}>
                                                     <Dropdown
-                                                        style={[styles.dropdown, isFocus && { borderColor: '#f97316' }]}
+                                                        style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                                         placeholderStyle={styles.placeholderStyle}
                                                         selectedTextStyle={styles.selectedTextStyle}
                                                         inputSearchStyle={styles.inputSearchStyle}
@@ -948,7 +948,7 @@ const EditFollowup = () => {
                                                 </View>
                                                 <View style={styles.btnCalender}>
                                                     <Dropdown
-                                                        style={[styles.dropdown, isFocus && { borderColor: '#f97316' }]}
+                                                        style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                                         placeholderStyle={styles.placeholderStyle}
                                                         selectedTextStyle={styles.selectedTextStyle}
                                                         inputSearchStyle={styles.inputSearchStyle}
@@ -1218,7 +1218,7 @@ const EditFollowup = () => {
                                 </View>
                                 <View style={styles.FrameInput}>
                                     <Dropdown
-                                        style={[styles.dropdown, isFocus && { borderColor: '#f97316' }]}
+                                        style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                         placeholderStyle={styles.placeholderStyle}
                                         selectedTextStyle={styles.selectedTextStyle}
                                         inputSearchStyle={styles.inputSearchStyle}
@@ -1246,7 +1246,7 @@ const EditFollowup = () => {
                                 </View>
                                 <View style={styles.FrameInput}>
                                     <Dropdown
-                                        style={[styles.dropdown, isFocus && { borderColor: '#f97316' }]}
+                                        style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                         placeholderStyle={styles.placeholderStyle}
                                         selectedTextStyle={styles.selectedTextStyle}
                                         inputSearchStyle={styles.inputSearchStyle}
@@ -1405,7 +1405,7 @@ const styles = StyleSheet.create({
     commonHeadLeftTxt: {
         fontSize: 18,
         fontWeight: '700',
-        color: '#f97316',
+        color: '#c02221',
         fontFamily: 'Poppins-Regular',
     },
     cardLeftTxt: {
@@ -1424,14 +1424,14 @@ const styles = StyleSheet.create({
         paddingBottom: 7,
         paddingLeft: 10,
         paddingRight: 10,
-        backgroundColor: '#f97316',
+        backgroundColor: '#c02221',
         shadowColor: '#000',
         elevation: 5,
         borderRadius: 5,
     },
     mainHeader: {
         fontSize: 18,
-        color: "#f97316",
+        color: "#c02221",
         paddingTop: 20,
         paddingBottom: 10,
         textAlign: "center",
@@ -1956,7 +1956,7 @@ const styles = StyleSheet.create({
         width: scale(22),
         height: scale(22),
         marginBottom: 30,
-        backgroundColor: '#f97316',
+        backgroundColor: '#c02221',
         borderRadius: 3,
         alignItems: 'center',
         justifyContent: 'center',

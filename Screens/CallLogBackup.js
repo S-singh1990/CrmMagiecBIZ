@@ -28,7 +28,7 @@ const CallLog = () => {
                                 >
                                     <View
                                         style={[
-                                            styles.callyzerIconBg, { backgroundColor: selectedTab == 0 ? '#f97316' : '#000' }
+                                            styles.callyzerIconBg, { backgroundColor: selectedTab == 0 ? '#c02221' : '#000' }
                                         ]}
                                     >
                                         <Image
@@ -36,7 +36,7 @@ const CallLog = () => {
                                             style={[styles.callyzerIcon, { tintColor: 'white' }]}
                                         />
                                     </View>
-                                    <Text style={[styles.Icontext, { color: selectedTab == 0 ? '#f97316' : '#000' }]}>
+                                    <Text style={[styles.Icontext, { color: selectedTab == 0 ? '#c02221' : '#000' }]}>
                                         AllCalls
                                     </Text>
                                 </TouchableOpacity>
@@ -48,7 +48,7 @@ const CallLog = () => {
                                 >
                                     <View
                                         style={[
-                                            styles.callyzerIconBg, { backgroundColor: selectedTab == 1 ? '#f97316' : '#000' }
+                                            styles.callyzerIconBg, { backgroundColor: selectedTab == 1 ? '#c02221' : '#000' }
                                         ]}
                                     >
                                         <Image
@@ -56,7 +56,7 @@ const CallLog = () => {
                                             style={[styles.callyzerIcon, { tintColor: 'white' }]}
                                         />
                                     </View>
-                                    <Text style={[styles.Icontext, { color: selectedTab == 1 ? '#f97316' : '#000' }]}>
+                                    <Text style={[styles.Icontext, { color: selectedTab == 1 ? '#c02221' : '#000' }]}>
                                         Incoming
                                     </Text>
                                 </TouchableOpacity>
@@ -68,7 +68,7 @@ const CallLog = () => {
                                 >
                                     <View
                                         style={[
-                                            styles.callyzerIconBg, { backgroundColor: selectedTab == 2 ? '#f97316' : '#000' }
+                                            styles.callyzerIconBg, { backgroundColor: selectedTab == 2 ? '#c02221' : '#000' }
                                         ]}
                                     >
                                         <Image
@@ -76,7 +76,7 @@ const CallLog = () => {
                                             style={[styles.callyzerIcon, { tintColor: 'white' }]}
                                         />
                                     </View>
-                                    <Text style={[styles.Icontext, { color: selectedTab == 2 ? '#f97316' : '#000' }]}>
+                                    <Text style={[styles.Icontext, { color: selectedTab == 2 ? '#c02221' : '#000' }]}>
                                         Outgoing
                                     </Text>
                                 </TouchableOpacity>
@@ -88,7 +88,7 @@ const CallLog = () => {
                                 >
                                     <View
                                         style={[
-                                            styles.callyzerIconBg, { backgroundColor: selectedTab == 3 ? '#f97316' : '#000' }
+                                            styles.callyzerIconBg, { backgroundColor: selectedTab == 3 ? '#c02221' : '#000' }
                                         ]}
                                     >
                                         <Image
@@ -96,7 +96,7 @@ const CallLog = () => {
                                             style={[styles.callyzerIcon, { tintColor: 'white' }]}
                                         />
                                     </View>
-                                    <Text style={[styles.Icontext, { color: selectedTab == 3 ? '#f97316' : '#000' }]}>
+                                    <Text style={[styles.Icontext, { color: selectedTab == 3 ? '#c02221' : '#000' }]}>
                                         Missed
                                     </Text>
                                 </TouchableOpacity>
@@ -108,7 +108,7 @@ const CallLog = () => {
                                 >
                                     <View
                                         style={[
-                                            styles.callyzerIconBg, { backgroundColor: selectedTab == 4 ? '#f97316' : '#000' }
+                                            styles.callyzerIconBg, { backgroundColor: selectedTab == 4 ? '#c02221' : '#000' }
                                         ]}
                                     >
                                         <Image
@@ -116,7 +116,7 @@ const CallLog = () => {
                                             style={[styles.callyzerIcon, { tintColor: 'white' }]}
                                         />
                                     </View>
-                                    <Text style={[styles.Icontext, { color: selectedTab == 4 ? '#f97316' : '#000' }]}>
+                                    <Text style={[styles.Icontext, { color: selectedTab == 4 ? '#c02221' : '#000' }]}>
                                         Rejected
                                     </Text>
                                 </TouchableOpacity>

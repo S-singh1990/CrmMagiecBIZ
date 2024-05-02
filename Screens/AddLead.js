@@ -163,7 +163,7 @@ const AddLead = () => {
         console.log("Contact number before validation:", data1.contact_no);
         if (!/^[\d]{8,10}$/.test(data1.contact_no)) {
             setNameError('');
-            setcontactError('Only 10 digits are allowes');
+            setcontactError('Minimum 10 digits required');
             console.log("Invalid contact number:", data1.contact_no);
             return;
         }
@@ -243,7 +243,7 @@ const AddLead = () => {
         console.log("Contact number before validation:", data1.contact_no);
         if (!/^[\d]{8,10}$/.test(data1.contact_no)) {
             setNameError('');
-            setcontactError('Only 10 digits are allowes');
+            setcontactError('Minimum 10 digits required');
             console.log("Invalid contact number:", data1.contact_no);
             return;
         }
@@ -280,9 +280,9 @@ const AddLead = () => {
         }
         else {
             setNameError('');
-            setcontactError('')
-            setagentError('')
-            setstatusError('')
+            setcontactError('');
+            setagentError('');
+            setstatusError('');
             setservicesError('');
             setleadsourceError('');
             // setleadcostError('');
@@ -517,10 +517,8 @@ const AddLead = () => {
     };
 
     const dispatchAgentAction = async () => {
-
         try {
             const role = await AsyncStorage.getItem('role');
-
             if (role === 'admin') {
                 getAllAgent();
             } else if (role === 'TeamLeader') {
@@ -538,13 +536,9 @@ const AddLead = () => {
         dispatchAgentAction();
     }, []);
 
-
-
-
     const toggleAccordion = () => {
         setIsExpanded(!isExpanded);
     };
-
 
     // Render the accordion content if expanded
     const renderAccordionContent = () => {
@@ -566,7 +560,7 @@ const AddLead = () => {
                     <View style={styles.FrameDtime}>
                         <View style={styles.btnCalender}>
                             <Dropdown
-                                style={[styles.dropdown, isFocus && { borderColor: '#f97316' }]}
+                                style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                 placeholderStyle={styles.placeholderStyle}
                                 selectedTextStyle={styles.selectedTextStyle}
                                 inputSearchStyle={styles.inputSearchStyle}
@@ -586,7 +580,7 @@ const AddLead = () => {
                         </View>
                         <View style={styles.btnCalender}>
                             <Dropdown
-                                style={[styles.dropdown, isFocus && { borderColor: '#f97316' }]}
+                                style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                 placeholderStyle={styles.placeholderStyle}
                                 selectedTextStyle={styles.selectedTextStyle}
                                 inputSearchStyle={styles.inputSearchStyle}
@@ -684,7 +678,7 @@ const AddLead = () => {
                                         <View style={styles.btnCalender}>
                                             <Dropdown
                                                 style={styles.dropdown}
-                                                // style={[styles.dropdown, isFocus && { borderColor: '#f97316' }]}
+                                                // style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                                 placeholderStyle={styles.placeholderStyle}
                                                 selectedTextStyle={styles.selectedTextStyle}
                                                 inputSearchStyle={styles.inputSearchStyle}
@@ -709,7 +703,7 @@ const AddLead = () => {
                                         <View style={styles.btnCalender}>
                                             <Dropdown
                                                 style={styles.dropdown}
-                                                // style={[styles.dropdown, isFocus && { borderColor: '#f97316' }]}
+                                                // style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                                 placeholderStyle={styles.placeholderStyle}
                                                 selectedTextStyle={styles.selectedTextStyle}
                                                 inputSearchStyle={styles.inputSearchStyle}
@@ -737,7 +731,7 @@ const AddLead = () => {
                                         <View style={styles.btnCalender}>
                                             <Dropdown
                                                 style={styles.dropdown}
-                                                // style={[styles.dropdown, isFocus && { borderColor: '#f97316' }]}
+                                                // style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                                 placeholderStyle={styles.placeholderStyle}
                                                 selectedTextStyle={styles.selectedTextStyle}
                                                 inputSearchStyle={styles.inputSearchStyle}
@@ -763,7 +757,7 @@ const AddLead = () => {
                                         <View style={styles.btnCalender}>
                                             <Dropdown
                                                 style={styles.dropdown}
-                                                // style={[styles.dropdown, isFocus && { borderColor: '#f97316' }]}
+                                                // style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                                 placeholderStyle={styles.placeholderStyle}
                                                 selectedTextStyle={styles.selectedTextStyle}
                                                 inputSearchStyle={styles.inputSearchStyle}
@@ -908,7 +902,7 @@ const styles = StyleSheet.create({
     commonHeadLeftTxt: {
         fontSize: 18,
         fontWeight: '700',
-        color: '#f97316',
+        color: '#c02221',
         fontFamily: 'Poppins-Regular',
     },
     cardLeftTxt: {
@@ -922,7 +916,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     commonHeadRightTxt: {
-        color: '#f97316',
+        color: '#c02221',
         paddingTop: 7,
         paddingBottom: 7,
         paddingLeft: 10,
@@ -934,7 +928,7 @@ const styles = StyleSheet.create({
     },
     mainHeader: {
         fontSize: 18,
-        color: "#f97316",
+        color: "#c02221",
         paddingTop: 20,
         paddingBottom: 10,
         textAlign: "center",
@@ -996,14 +990,14 @@ const styles = StyleSheet.create({
 
     },
     btnSave: {
-        backgroundColor: "#f97316",
+        backgroundColor: "#c02221",
         Color: "#ffffff",
         paddingHorizontal: 20,
         paddingVertical: 10,
         textAlign: "center",
     },
     btnSaveAnd: {
-        backgroundColor: "#ea580c",
+        backgroundColor: "#d92726",
         Color: "#ffffff",
         paddingHorizontal: 5,
         paddingVertical: 10,

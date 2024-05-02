@@ -84,7 +84,7 @@ const CustomDrawer = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: '#f97316' }}>
+            <DrawerContentScrollView {...props} contentContainerStyle={{ backgroundColor: '#c02221' }}>
                 <ImageBackground
                     source={require('../assets/images/headbg.jpg')}
                     style={{ padding: 15, flexDirection: 'row', }}>
@@ -150,14 +150,15 @@ const CustomDrawer = (props) => {
                                 <Text style={styles.drawerTabTxt}>Analytic Report</Text>
                             </View>
                         </TouchableOpacity>
-                    ) : (
+                    ) : null}
+                    {/* (
                         <TouchableOpacity onPress={() => navigateToScreen('Analytics')}>
                             <View style={styles.drawerTab}>
                                 <Ionicons name="bar-chart-outline" size={20} style={styles.drawerTabIcon} />
                                 <Text style={styles.drawerTabTxt}>Analytic's</Text>
                             </View>
                         </TouchableOpacity>
-                    )}
+                    )} */}
                     <TouchableOpacity onPress={() => navigateToScreen('WaInbox')}>
                         <View style={styles.drawerTab}>
                             <Ionicons name="logo-whatsapp" size={20} style={styles.drawerTabIcon} />
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
         paddingVertical: 13,
     },
     drawerTabIcon: {
-        color: '#f97316'
+        color: '#c02221'
     },
     drawerTabTxt: {
         color: '#393939',

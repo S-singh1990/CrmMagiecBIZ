@@ -23,27 +23,28 @@ const AnalyticReport = () => {
     const [agent, setagent] = useState([]);
     const [agentError, setagentError] = useState('');
     const [value, setValue] = useState(null);
-    useEffect(() => {
 
-        //// for get  Agent
-        const fetchAgent = async () => {
-            try {
-                const response = await fetch(
-                    `${PROCESS_KEY}/get_all_agent`
-                );
-                const result = await response.json();
-                const agentList = result?.agent.map(agent111 => ({
-                    label: agent111.agent_name,
-                    value: agent111._id,
-                }));
-                setagent(agentList);
-                //setservices(result);  
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-        fetchAgent();
-    }, []);
+
+    // useEffect(() => {
+    //     //// for get  Agent
+    //     const fetchAgent = async () => {
+    //         try {
+    //             const response = await fetch(
+    //                 `${PROCESS_KEY}/get_all_agent`
+    //             );
+    //             const result = await response.json();
+    //             const agentList = result?.agent.map(agent111 => ({
+    //                 label: agent111.agent_name,
+    //                 value: agent111._id,
+    //             }));
+    //             setagent(agentList);
+    //             //setservices(result);  
+    //         } catch (error) {
+    //             console.error('Error fetching data:', error);
+    //         }
+    //     };
+    //     fetchAgent();
+    // }, []);
 
     const [data1, setData] = useState();
 
@@ -90,7 +91,6 @@ const AnalyticReport = () => {
             setAuthenticated('');
         }
     }
-
 
     useEffect(() => {
         const checkAuthentication = async () => {
@@ -194,6 +194,112 @@ const AnalyticReport = () => {
     ];
 
 
+    const getAllAgentWithData = async (data) => {
+        try {
+            const response = await fetch(`${PROCESS_KEY}/getAllAgentByTeamLeader`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            const result = await response.json();
+            if (result.success === true) {
+                const agentList = result?.agent.map(agent111 => ({
+                    label: agent111.agent_name,
+                    value: agent111._id,
+                }));
+                setagent(agentList);
+            } else {
+                if (result.message === 'Client must be connected before running operations') {
+                    const secondResponse = await fetch(`${PROCESS_KEY}/getAllAgentByTeamLeader`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+                    const secondResult = await secondResponse.json();
+                    if (secondResult.success === true) {
+                        const agentList = result?.agent.map(agent111 => ({
+                            label: agent111.agent_name,
+                            value: agent111._id,
+                        }));
+                        setagent(agentList);
+                    }
+                } else {
+                    console.error(result.message);
+                    return null;
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            return null;
+        }
+    };
+    const getAllAgent = async (data) => {
+        const role = await AsyncStorage.getItem('role');
+
+        try {
+            if (role === 'admin') {
+                const response = await fetch(`${PROCESS_KEY}/get_all_agent`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+                const result = await response.json();
+                console.log('result', result)
+                if (result.success === true) {
+                    const agentList = result?.agent.map(agent111 => ({
+                        label: agent111.agent_name,
+                        value: agent111._id,
+                    }));
+                    setagent(agentList);
+                }
+            } else if (role === 'user') {
+                const response = await fetch(`${PROCESS_KEY}/getAllAgentofATeamByAgent`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+                // console.log('rolerolefdff', result)
+                if (result.success === true) {
+                    const agentList = result?.agent.map(agent111 => ({
+                        label: agent111.agent_name,
+                        value: agent111._id,
+                    }));
+                    setagent(agentList);
+                } else {
+                    console.error(result.message);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    const dispatchAgentAction = async () => {
+        try {
+            const role = await AsyncStorage.getItem('role');
+            if (role === 'admin') {
+                getAllAgent();
+            } else if (role === 'TeamLeader') {
+                const userId = await AsyncStorage.getItem('user_id');
+                getAllAgentWithData({ assign_to_agent: userId });
+            } else if (role === 'user') {
+                const userId = await AsyncStorage.getItem('user_id');
+                getAllAgent({ assign_to_agent: userId });
+            }
+        } catch (error) {
+            console.error('Error dispatching agent action:', error);
+        }
+    };
+    useEffect(() => {
+        dispatchAgentAction();
+    }, []);
+
     return (
         <>
             <View style={styles.mainContainer}>
@@ -206,7 +312,7 @@ const AnalyticReport = () => {
 
                                 <View style={styles.FrameInput}>
                                     <Dropdown
-                                        style={[styles.dropdown, isFocus && { borderColor: '#f97316' }]}
+                                        style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                         placeholderStyle={styles.placeholderStyle}
                                         selectedTextStyle={styles.selectedTextStyle}
                                         inputSearchStyle={styles.inputSearchStyle}
@@ -283,7 +389,6 @@ const AnalyticReport = () => {
                         {/* graph */}
                         <TouchableOpacity style={styles.graph}>
                             <View style={styles.graphInn}>
-
                                 <PieChart
                                     data={data22}
                                     width={350}
@@ -302,7 +407,6 @@ const AnalyticReport = () => {
                                     paddingLeft="-5"
                                     absolute
                                 />
-
                             </View>
                         </TouchableOpacity>
                         {/* graph */}
@@ -310,7 +414,6 @@ const AnalyticReport = () => {
 
                     <View style={styles.cardWraper}>
                         <View style={styles.cardWraperInn}>
-
                             <TouchableOpacity style={styles.card}>
                                 <View style={styles.cardInn}>
                                     <View style={styles.cardRowF}>
@@ -574,7 +677,7 @@ const styles = StyleSheet.create({
     commonHeadLeftTxt: {
         fontSize: 18,
         fontWeight: '700',
-        color: '#f97316',
+        color: '#c02221',
         fontFamily: 'Poppins-Regular',
     },
     cardLeftTxt: {
@@ -588,7 +691,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     commonHeadRightTxt: {
-        color: '#f97316',
+        color: '#c02221',
         paddingTop: 7,
         paddingBottom: 7,
         paddingLeft: 10,

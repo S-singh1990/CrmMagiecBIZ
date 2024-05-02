@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     height: "100%",
     paddingTop: 80,
-    backgroundColor: "#f97316",
+    backgroundColor: "#c02221",
   },
   mainHeader: {
     fontSize: 26,
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   checkbox: {
   },
   btnLog: {
-    backgroundColor: "#f97316",
+    backgroundColor: "#c02221",
     color: "#ffffff",
     paddingHorizontal: 10,
     paddingVertical: 10,

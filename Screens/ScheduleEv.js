@@ -387,7 +387,7 @@ const styles = StyleSheet.create({
     commonHeadLeftTxt: {
         fontSize: 18,
         fontWeight: '700',
-        color: '#f97316',
+        color: '#c02221',
         fontFamily: 'Poppins-Regular',
     },
     cardLeftTxt: {
@@ -401,7 +401,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     commonHeadRightTxt: {
-        color: '#f97316',
+        color: '#c02221',
         paddingTop: 7,
         paddingBottom: 7,
         paddingLeft: 10,
