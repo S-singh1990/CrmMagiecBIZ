@@ -29,6 +29,7 @@ import Analytics from './Screens/Analytics';
 import ScheduleEv from './Screens/ScheduleEv';
 import Notification from './Screens/Notification';
 import WaInbox from './Screens/WaInbox';
+import ImportedLead from './Screens/ImportedLead';
 
 const Tab = createBottomTabNavigator();
 
@@ -269,6 +270,19 @@ const StackNav = () => {
         }}
       />
       <Stack.Screen
+        name="ImportedLead"
+        component={ImportedLead}
+        options={{
+          headerTitle: () => (
+            <View>
+              <View style={styles.headTitle}>
+                <Text style={styles.headTitleTxt}>Imported Lead's</Text>
+              </View>
+            </View>
+          )
+        }}
+      />
+      <Stack.Screen
         name="UnAssignedLeads"
         component={UnAssignedLeads}
         options={{
@@ -489,7 +503,7 @@ const styles = StyleSheet.create({
   },
   headTitleTxt: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '500',
   },
   countIcon: {
@@ -502,7 +516,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     borderRadius: 50,
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: 8,
     fontWeight: '700',
   },
   waCountIcon: {
@@ -516,7 +530,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     borderRadius: 50,
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: 8,
     fontWeight: '700',
   },
 });

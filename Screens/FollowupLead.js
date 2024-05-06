@@ -59,6 +59,7 @@ const FollowupLead = ({ daata }) => {
             }
         };
         fetchStatus();
+
     }, [refreshFlag]);
 
     const getAllAgentWithData = async (data) => {
@@ -113,7 +114,7 @@ const FollowupLead = ({ daata }) => {
                     },
                 });
                 const result = await response.json();
-                console.log('result', result)
+                // console.log('result', result)
                 if (result.success === true) {
                     const agentList = result?.agent.map(agent111 => ({
                         label: agent111.agent_name,
@@ -254,6 +255,7 @@ const FollowupLead = ({ daata }) => {
     }
 
     const onSearch = (text) => {
+        console.warn(text)
         setsearchtext(text);
         if (!text == '') {
             setdata(search);
@@ -280,6 +282,13 @@ const FollowupLead = ({ daata }) => {
             setdata(search)
         }
     }
+
+
+    useEffect(() => {
+
+
+    }, [search]);
+
 
     const ClearText = async () => {
         setsearchtext('')
@@ -384,67 +393,105 @@ const FollowupLead = ({ daata }) => {
                     <>
                         {selectedItems?.length > 0 ? (
                             <View style={styles.bulkContainerOuter}>
-                                <View style={styles.bulkContainer}>
-                                    <Text style={styles.bulkHeader}>Bulk Action</Text>
-                                    <View style={styles.FrameDtime}>
-                                        <View style={styles.btnCalender}>
-                                            <Dropdown
-                                                style={styles.dropdown}
-                                                placeholderStyle={styles.placeholderStyle}
-                                                selectedTextStyle={styles.selectedTextStyle}
-                                                inputSearchStyle={styles.inputSearchStyle}
-                                                iconStyle={styles.iconStyle}
-                                                data={agent}
-                                                search
-                                                maxHeight={300}
-                                                labelField="label"
-                                                valueField="value"
-                                                placeholder={!isFocus ? 'Agent' : '...'}
-                                                searchPlaceholder="Search..."
-                                                value={value}
-                                                onFocus={() => setIsFocus(true)}
-                                                onBlur={() => setIsFocus(false)}
-                                                onChange={item => {
-                                                    setLeadagent({ ...Leadagent, 'agent': item.value });
-                                                    setIsFocus(false);
-                                                }}
-                                            />
-                                        </View>
-                                        <View style={styles.btnCalender}>
-                                            <Dropdown
-                                                style={styles.dropdown}
-                                                placeholderStyle={styles.placeholderStyle}
-                                                selectedTextStyle={styles.selectedTextStyle}
-                                                inputSearchStyle={styles.inputSearchStyle}
-                                                iconStyle={styles.iconStyle}
-                                                data={status}
-                                                search
-                                                maxHeight={300}
-                                                labelField="label"
-                                                valueField="value"
-                                                placeholder={!isFocus ? 'Status' : '...'}
-                                                searchPlaceholder="Search..."
-                                                value={value}
-                                                onFocus={() => setIsFocus(true)}
-                                                onBlur={() => setIsFocus(false)}
-                                                onChange={item => {
-                                                    setLeadStatus({ ...LeadStatus, 'status': item.value });
-                                                    setIsFocus(false);
-                                                }}
+                                {(role === 'admin' || role === 'TeamLeader') ? (
+                                    <View style={styles.bulkContainer}>
+                                        <Text style={styles.bulkHeader}>Bulk Action</Text>
+                                        <View style={styles.FrameDtime}>
+                                            <View style={styles.btnCalender}>
+                                                <Dropdown
+                                                    style={styles.dropdown}
+                                                    placeholderStyle={styles.placeholderStyle}
+                                                    selectedTextStyle={styles.selectedTextStyle}
+                                                    inputSearchStyle={styles.inputSearchStyle}
+                                                    iconStyle={styles.iconStyle}
+                                                    data={agent}
+                                                    search
+                                                    maxHeight={300}
+                                                    labelField="label"
+                                                    valueField="value"
+                                                    placeholder={!isFocus ? 'Agent' : '...'}
+                                                    searchPlaceholder="Search..."
+                                                    value={value}
+                                                    onFocus={() => setIsFocus(true)}
+                                                    onBlur={() => setIsFocus(false)}
+                                                    onChange={item => {
+                                                        setLeadagent({ ...Leadagent, 'agent': item.value });
+                                                        setIsFocus(false);
+                                                    }}
+                                                />
+                                            </View>
+                                            <View style={styles.btnCalender}>
+                                                <Dropdown
+                                                    style={styles.dropdown}
+                                                    placeholderStyle={styles.placeholderStyle}
+                                                    selectedTextStyle={styles.selectedTextStyle}
+                                                    inputSearchStyle={styles.inputSearchStyle}
+                                                    iconStyle={styles.iconStyle}
+                                                    data={status}
+                                                    search
+                                                    maxHeight={300}
+                                                    labelField="label"
+                                                    valueField="value"
+                                                    placeholder={!isFocus ? 'Status' : '...'}
+                                                    searchPlaceholder="Search..."
+                                                    value={value}
+                                                    onFocus={() => setIsFocus(true)}
+                                                    onBlur={() => setIsFocus(false)}
+                                                    onChange={item => {
+                                                        setLeadStatus({ ...LeadStatus, 'status': item.value });
+                                                        setIsFocus(false);
+                                                    }}
 
-                                            />
+                                                />
+                                            </View>
+                                        </View>
+                                        <View style={styles.btnContainer}>
+                                            <TouchableOpacity
+                                                style={styles.btnLog}
+                                                onPress={bulkAction}
+                                            >
+                                                <Text style={styles.btnLogtx}>Submit</Text>
+                                            </TouchableOpacity>
                                         </View>
                                     </View>
-                                    <View style={styles.btnContainer}>
-                                        <TouchableOpacity
-                                            style={styles.btnLog}
-                                            onPress={bulkAction}
-                                        >
-                                            <Text style={styles.btnLogtx}>Submit</Text>
-                                        </TouchableOpacity>
+                                ) : (
+                                    <View style={styles.bulkContainer}>
+                                        <Text style={styles.bulkHeader}>Bulk Action</Text>
+                                        <View style={styles.FrameDtime}>
+                                            <View style={styles.btnCalender}>
+                                                <Dropdown
+                                                    style={styles.dropdown}
+                                                    placeholderStyle={styles.placeholderStyle}
+                                                    selectedTextStyle={styles.selectedTextStyle}
+                                                    inputSearchStyle={styles.inputSearchStyle}
+                                                    iconStyle={styles.iconStyle}
+                                                    data={status}
+                                                    search
+                                                    maxHeight={300}
+                                                    labelField="label"
+                                                    valueField="value"
+                                                    placeholder={!isFocus ? 'Status' : '...'}
+                                                    searchPlaceholder="Search..."
+                                                    value={value}
+                                                    onFocus={() => setIsFocus(true)}
+                                                    onBlur={() => setIsFocus(false)}
+                                                    onChange={item => {
+                                                        setLeadStatus({ ...LeadStatus, 'status': item.value });
+                                                        setIsFocus(false);
+                                                    }}
+                                                />
+                                            </View>
+                                            <View style={styles.btnCalender}>
+                                                <TouchableOpacity
+                                                    style={styles.btnLogUser}
+                                                    onPress={bulkAction}
+                                                >
+                                                    <Text style={styles.btnLogtx}>Submit</Text>
+                                                </TouchableOpacity>
+                                            </View>
+                                        </View>
                                     </View>
-                                    {/* <CustomAlert visible={showMsg} message={alertMessage} onClose={() => setShowMsg(false)} /> */}
-                                </View>
+                                )}
                             </View>
                         ) : (
                             <View style={styles.searchContainerOuter}>
@@ -461,6 +508,9 @@ const FollowupLead = ({ daata }) => {
                                             onSearch(txt);
                                             // setSearch(txt);
                                         }}
+                                    // onChange={txt => {
+                                    //     onSearch(txt); 
+                                    // }}
                                     />
                                     <TouchableOpacity
                                         style={{ marginRight: 15 }}
@@ -974,6 +1024,16 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         borderRadius: 5,
         marginTop: 5,
+        marginRight: 4,
+        textAlign: "center",
+        width: '100%',
+    },
+    btnLogUser: {
+        backgroundColor: "#22c55e",
+        Color: "#ffffff",
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 5,
         marginRight: 4,
         textAlign: "center",
         width: '100%',

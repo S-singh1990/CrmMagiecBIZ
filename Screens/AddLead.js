@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { PROCESS_KEY } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import moment from "moment";
 
 const Stack = createNativeStackNavigator();
 const AddLead = () => {
@@ -37,7 +38,7 @@ const AddLead = () => {
 
         setSelectedDate(formattedDate.split('T')['0']);
         setInputDate(formattedDate.split('T')['0']); // Set the input value if needed
-        handleInputChange('followup_date', formattedDate);
+        handleInputChange('followup_date', formattedDate.split('T')['0']);
     };
 
     const showTimePicker = () => {
@@ -47,21 +48,31 @@ const AddLead = () => {
         setTimePickerVisibility(false);
     };
     const handleTimeConfirm = (date) => {
-        console.log(date)
+        console.log('date', date)
         hideTimePicker();
         const formattedTime = date.toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata' });
         setSelectedTime(formattedTime);
-        setInputTime(formattedTime); // Set the input value if needed
+        setInputTime(formattedTime);
+        const selecteddate = data1?.followup_date;
+        if (data1?.followup_date.includes("T")) {
+        } else {
+            const combinedDateTimeString = `${selecteddate}T${formattedTime}`;
+            const givenDateTime = moment(combinedDateTimeString, "YYYY-MM-DDThh:mm:ss A");
+            const formattedDateTimeString = givenDateTime.format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+            handleInputChange('followup_date', formattedDateTimeString);
+        }
+
 
     };
 
-    console.log(data1)
+
     const [value, setValue] = useState(null);
     const [isFocus, setIsFocus] = useState(false);
 
     const [name, setName] = useState('');
 
     const [nameError, setNameError] = useState('');
+    const [DatetimeError, setDatetimeError] = useState('');
     const [contactError, setcontactError] = useState('');
     const [servicesError, setservicesError] = useState('');
     const [leadsourceError, setleadsourceError] = useState('');
@@ -94,6 +105,7 @@ const AddLead = () => {
     const [state, setstate] = useState([]);
 
     const handleInputChange = (key, value, field, text) => {
+
         const truncatedText = text ? text.substring(0, 10) : '';
         setData({ ...data1, [field]: truncatedText });
         setData({ ...data1, [field]: text });
@@ -108,7 +120,7 @@ const AddLead = () => {
             ...data1,
             [key]: value,
         });
-        console.log('data1', data1)
+        // console.log('data1', data1)
     };
 
     const servicesset = (key, value) => {
@@ -151,158 +163,177 @@ const AddLead = () => {
 
     const submitLead = async (e) => {
         const data2 = { ...data1, commented_id: isAuthenticated, };
+
+
         if (!data1.full_name) {
             setNameError('Please Enter Full Name')
             return;
+        } else {
+            setNameError('')
         }
         if (!data1.contact_no) {
-            setNameError('');
             setcontactError('Please Enter Contact Number');
             return;
-        }
-        console.log("Contact number before validation:", data1.contact_no);
-        if (!/^[\d]{8,10}$/.test(data1.contact_no)) {
-            setNameError('');
-            setcontactError('Minimum 10 digits required');
-            console.log("Invalid contact number:", data1.contact_no);
-            return;
-        }
-        console.log("Contact number after validation:", data1.contact_no);
-        if (!data1.assign_to_agent) {
-            setNameError('');
+        } else {
             setcontactError('');
+        }
+
+        if (!/^[\d]{8,10}$/.test(data1.contact_no)) {
+            setcontactError('Minimum 10 digits required');
+            return;
+        } else {
+            setcontactError('');
+        }
+        if (!data1.assign_to_agent) {
             setagentError('Please Select Agent')
             return;
+        } else {
+            setagentError('')
         }
         if (!data1.status) {
-            setNameError('');
-            setcontactError('');
-            setagentError('')
             setstatusError('Please Select Status')
             return;
+        } else {
+            setstatusError('')
         }
         if (!data1.service) {
-            setNameError('');
-            setcontactError('');
-            setagentError('');
-            setstatusError('');
             setservicesError('Please Select Service');
             return;
+        } else {
+            setservicesError('');
         }
         if (!data1.lead_source) {
-            setNameError('');
-            setcontactError('');
-            setagentError('');
-            setstatusError('');
-            setservicesError('');
             setleadsourceError('Please Select Lead Source');
             return;
-        }
-        else {
-            setNameError('');
-            setcontactError('')
-            setagentError('')
-            setstatusError('')
-            setservicesError('');
+        } else {
             setleadsourceError('');
-            const apiUrl = `${PROCESS_KEY}/add_lead`;
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data2),
-                });
-                if (!response.ok) {
-                    showAlert('Something Wrong')
-                }
-                const data = await response.json();
-                navigation.navigate("FollowupLead");
-                setData({});
-            } catch (error) {
+        }
+        if (!data1.followup_date) {
+            setDatetimeError('Please Select Date')
+            return;
+
+        } else {
+            if (data1?.followup_date && data1.followup_date.includes("T")) {
+                setDatetimeError('');
+            } else {
+                setDatetimeError('Please Select Time');
+                return;
             }
+            setDatetimeError('');
+            console.log('ff', data1.followup_date)
+        }
+        const apiUrl = `${PROCESS_KEY}/add_lead`;
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data2),
+            });
+            if (!response.ok) {
+                showAlert('Something Wrong')
+            } else {
+                showAlert('Lead Add Successfully');
+                resetForm();
+            }
+            const data = await response.json();
+            navigation.navigate("FollowupLead");
+            setData({});
+        } catch (error) {
         }
     };
 
     const submitAndAdd = async (e) => {
         const data2 = { ...data1, commented_id: isAuthenticated, };
-        // const updatedLeadData = await {
-        //     ...data1,
-        //     commented_id:localStorage.getItem("user_id"),
-        //   };
         if (!data1.full_name) {
             setNameError('Please Enter Full Name')
             return;
+        } else {
+            setNameError('')
         }
         if (!data1.contact_no) {
-            setNameError('');
             setcontactError('Please Enter Contact Number');
             return;
         }
-        console.log("Contact number before validation:", data1.contact_no);
         if (!/^[\d]{8,10}$/.test(data1.contact_no)) {
-            setNameError('');
             setcontactError('Minimum 10 digits required');
-            console.log("Invalid contact number:", data1.contact_no);
             return;
+        } else {
+            setcontactError('')
         }
-        console.log("Contact number after validation:", data1.contact_no);
+
         if (!data1.assign_to_agent) {
-            setNameError('');
-            setcontactError('');
             setagentError('Please Select Agent')
             return;
-        }
-        if (!data1.status) {
-            setNameError('');
-            setcontactError('');
+        } else {
             setagentError('')
+        }
+
+        if (!data1.status) {
             setstatusError('Please Select Status')
             return;
+        } else {
+            setstatusError('')
         }
         if (!data1.service) {
-            setNameError('');
-            setcontactError('');
-            setagentError('');
-            setstatusError('');
             setservicesError('Please Select Service');
             return;
+        } else {
+            setservicesError('')
         }
         if (!data1.lead_source) {
-            setNameError('');
-            setcontactError('');
-            setagentError('');
-            setstatusError('');
-            setservicesError('');
             setleadsourceError('Please Select Lead Source');
             return;
+        } else {
+            setleadsourceError('')
         }
-        else {
-            setNameError('');
-            setcontactError('');
-            setagentError('');
-            setstatusError('');
-            setservicesError('');
-            setleadsourceError('');
-            // setleadcostError('');
-            const apiUrl = `${PROCESS_KEY}/add_lead`;
-            try {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data2),
-                });
-                if (!response.ok) {
-                    showAlert('Something Wrong')
-                }
-                const data = await response.json();
-                setData({});
-            } catch (error) {
+
+        if (!data1.followup_date) {
+            setDatetimeError('Please Select Date')
+            return;
+
+        } else {
+            if (data1?.followup_date && data1.followup_date.includes("T")) {
+                setDatetimeError('');
+            } else {
+                setDatetimeError('Please Select Time');
+                return;
             }
+            setDatetimeError('');
+
         }
+        // else {
+        setNameError('');
+        setcontactError('');
+        setagentError('');
+        setstatusError('');
+        setservicesError('');
+        setleadsourceError('');
+        // setleadcostError('');
+        const apiUrl = `${PROCESS_KEY}/add_lead`;
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data2),
+            });
+            if (!response.ok) {
+                showAlert('Something Wrong')
+            } else {
+                showAlert('Lead Add Successfully');
+                resetForm();
+            }
+            const data = await response.json();
+            setData({});
+        } catch (error) {
+        }
+    };
+
+    const resetForm = () => {
+        setData({});
     };
 
     useEffect(() => {
@@ -831,6 +862,7 @@ const AddLead = () => {
                                                 />
                                             </TouchableOpacity>
                                         </View>
+                                        {DatetimeError ? <Text style={styles.errorText}>{DatetimeError}</Text> : null}
                                     </View>
                                 </View>
                             </View>

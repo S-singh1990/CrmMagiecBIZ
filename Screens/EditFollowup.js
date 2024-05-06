@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, Modal, ScrollView, Image, Dimensions, Linking } from 'react-native'
+import { StyleSheet, View, TextInput, Alert, Text, TouchableOpacity, Modal, ScrollView, Image, Dimensions, Linking } from 'react-native'
 import { scale, moderateScale } from 'react-native-size-matters';
 import { Dropdown } from 'react-native-element-dropdown';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -34,6 +34,31 @@ const EditFollowup = () => {
     const selectedAgentRef = useRef('');
     const [onlydate, setonlydate] = useState('');
     const [onlytime, setonlytime] = useState('');
+
+    const [role, setRole] = useState('');
+    const [userName, setuser] = useState('');
+
+    const setRoleFromStorage = async () => {
+        try {
+            const userRole = await AsyncStorage.getItem('role');
+            const userName = await AsyncStorage.getItem('name');
+            if (userRole) {
+                setRole(userRole);
+            } else {
+                setRole('');
+            }
+            if (userName) {
+                setuser(userName);
+            }
+        } catch (error) {
+            console.error('Error getting user role:', error);
+        }
+    };
+
+    useEffect(() => {
+        setRoleFromStorage();
+    }, []);
+
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -100,6 +125,18 @@ const EditFollowup = () => {
         });
     }
 
+    const showAlert = (msg) => {
+        console.log(msg)
+        Alert.alert(
+            'Alert Title',
+            msg,
+            [
+                { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ],
+            { cancelable: false }
+        );
+    };
+
     const [isAuthenticated, setAuthenticated] = useState('');
     useEffect(() => {
         const checkAuthentication = async () => {
@@ -114,7 +151,8 @@ const EditFollowup = () => {
     }, []);
 
     const [commentError, setCommentError] = useState('');
-
+    const [dateError, setdateError] = useState('');
+    const [datetimeError, setdatetimeError] = useState('');
     const submitLead = async (e) => {
 
         if (!data1.followup_desc) {
@@ -123,7 +161,19 @@ const EditFollowup = () => {
         } else {
             setCommentError('');
         }
+        if (!onlydate) {
+            setdateError('Please Select date');
+            return;
+        } else {
+            setdateError('');
+        }
 
+        if (!onlytime) {
+            setdatetimeError('Please Select Time');
+            return;
+        } else {
+            setdatetimeError('');
+        }
         const [timeWithoutMeridian, meridian] = onlytime.split(' ');
         const [hours, minutes, seconds] = timeWithoutMeridian.split(':');
         let dddd;
@@ -137,7 +187,6 @@ const EditFollowup = () => {
             lead_id: leadId,
             commented_by: isAuthenticated,
             followup_date: dddd,
-
         };
 
         if (updatedLeadData?.assign_to_agent === '') {
@@ -169,12 +218,13 @@ const EditFollowup = () => {
             if (!response.ok) {
                 setInputTime('')
                 setInputDate('')
-                // showAlert('Something Wrong')
+                showAlert('Something Wrong')
             } else {
+                // showAlert('Lead Update Successfully');
+                // resetForm();
                 const data = await response.json();
                 setInputTime('')
                 setInputDate('')
-                // showAlert('Followup Update Successfully');
                 navigation.navigate("FollowupLead");
                 setData({});
             }
@@ -1216,9 +1266,66 @@ const EditFollowup = () => {
                                         editable={false}
                                     />
                                 </View>
+
                                 <View style={styles.FrameInput}>
+                                    {(role === 'admin' || role === 'TeamLeader') ? (
+                                        <Dropdown
+                                            style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
+                                            placeholderStyle={styles.placeholderStyle}
+                                            selectedTextStyle={styles.selectedTextStyle}
+                                            inputSearchStyle={styles.inputSearchStyle}
+                                            iconStyle={styles.iconStyle}
+                                            data={agent}
+                                            search
+                                            maxHeight={300}
+                                            labelField="label"
+                                            valueField="value"
+                                            placeholder={!isFocus ? 'Select Agent' : '...'}
+                                            searchPlaceholder="Search..."
+                                            value={value}
+                                            onFocus={() => setIsFocus(true)}
+                                            onBlur={() => setIsFocus(false)}
+                                            onChange={(item) => {
+                                                const updatedAssignToAgent = agent?.find((agentItem) => agentItem?.value === item?.value);
+                                                setData({
+                                                    ...data1,
+                                                    assign_to_agent: updatedAssignToAgent?.value,
+                                                });
+                                                setIsFocus(false);
+                                            }}
+                                        />
+                                    ) : (
+                                        <Dropdown
+                                            style={styles.dropdown}
+                                            disable
+                                            placeholderStyle={styles.placeholderStyle}
+                                            selectedTextStyle={styles.selectedTextStyle}
+                                            inputSearchStyle={styles.inputSearchStyle}
+                                            iconStyle={styles.iconStyle}
+                                            data={agent}
+                                            search
+                                            maxHeight={300}
+                                            labelField="label"
+                                            valueField="value"
+                                            placeholder={!isFocus ? 'Select Agent' : '...'}
+                                            searchPlaceholder="Search..."
+                                            value={value}
+                                            onChange={(item) => {
+                                                const updatedAssignToAgent = agent?.find((agentItem) => agentItem?.value === item?.value);
+                                                setData({
+                                                    ...data1,
+                                                    assign_to_agent: updatedAssignToAgent?.value,
+                                                });
+                                            }}
+                                        />
+                                    )}
+                                    {agentError ? <Text style={styles.errorText}>{agentError}</Text> : null}
+                                </View>
+
+                                {/* <View style={styles.FrameInput}>
                                     <Dropdown
                                         style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
+                                        disable
                                         placeholderStyle={styles.placeholderStyle}
                                         selectedTextStyle={styles.selectedTextStyle}
                                         inputSearchStyle={styles.inputSearchStyle}
@@ -1231,8 +1338,6 @@ const EditFollowup = () => {
                                         placeholder={!isFocus ? 'Select Agent' : '...'}
                                         searchPlaceholder="Search..."
                                         value={value}
-                                        onFocus={() => setIsFocus(true)}
-                                        onBlur={() => setIsFocus(false)}
                                         onChange={(item) => {
                                             const updatedAssignToAgent = agent?.find((agentItem) => agentItem?.value === item?.value);
                                             setData({
@@ -1243,7 +1348,8 @@ const EditFollowup = () => {
                                         }}
                                     />
                                     {agentError ? <Text style={styles.errorText}>{agentError}</Text> : null}
-                                </View>
+                                </View> */}
+
                                 <View style={styles.FrameInput}>
                                     <Dropdown
                                         style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
@@ -1302,6 +1408,8 @@ const EditFollowup = () => {
                                                 mode={'date'}
                                             />
                                         </TouchableOpacity>
+                                        {/* <Text style={styles.errorText}></Text> */}
+                                        {dateError ? <Text style={styles.errorText}>{dateError}</Text> : null}
                                     </View>
                                     <View style={styles.btnCalender}>
                                         <TouchableOpacity onPress={showTimePicker} style={styles.btnDate}>
@@ -1317,6 +1425,7 @@ const EditFollowup = () => {
                                                 mode={'time'}
                                             />
                                         </TouchableOpacity>
+                                        {datetimeError ? <Text style={styles.errorText}>{datetimeError}</Text> : null}
                                     </View>
                                 </View>
 

@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView, } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { scale, moderateScale, moderateVerticalScale, } from 'react-native-size-matters';
 import { TextInput } from 'react-native-gesture-handler';
 import BottomNav from '../Components/BottomNav';
@@ -17,13 +17,13 @@ const CustomLoader = () => (
     </View>
 );
 
-const UnAssignedLeads = () => {
+const ImportedLead = () => {
 
     const [isLoading, setLoading] = useState(true);
     const navigation = useNavigation();
     const [data, setdata] = useState([]);
     const [isAuthenticated, setAuthenticated] = useState('');
-    const [role, setrole] = useState('');
+    const [role, setRole] = useState('');
     const [refreshFlag, setRefreshFlag] = useState(false);
     const [search, setSearch] = useState([]);
     const [searchtext, setsearchtext] = useState('');
@@ -235,10 +235,11 @@ const UnAssignedLeads = () => {
         try {
             setLoading(true);
             const response = await axios.get(
-                `${PROCESS_KEY}/getAllUnassignLead`
+                `${PROCESS_KEY}/get_all_lead`
             );
-            setdata(response?.data?.lead);
-            setSearch(response?.data?.lead);
+            const filteredLeads = response?.data?.lead?.filter(lead => lead?.type === 'excel');
+            setdata(filteredLeads);
+            setSearch(filteredLeads);
         } catch (error) {
             if (error.response) {
                 console.log("Server responded with a non-success status:", error.response.status);
@@ -286,17 +287,98 @@ const UnAssignedLeads = () => {
         setdata(search)
     }
 
+    const getAllLeadByAgent = async (assign_to_agent) => {
+        try {
+            setLoading(true);
+            const response = await axios.post(
+                `${PROCESS_KEY}/get_Leadby_agentid_with_status`,
+                { assign_to_agent }
+            );
+            const filteredLeads = response?.data?.lead?.filter(lead => lead?.type === 'excel');
+            setdata(filteredLeads);
+            setSearch(filteredLeads);
+        } catch (error) {
+            if (error.response) {
+                console.log("Server responded with a non-success status:", error.response.status);
+                console.log("Response data:", error.response.data);
+            } else if (error.request) {
+                console.log("No response received from the server");
+            } else {
+                console.log("Error during request setup:", error.message);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const getAllLeadByTeamLeader = async (assign_to_agent) => {
+        try {
+            setLoading(true);
+            const response = await axios.post(
+                `${PROCESS_KEY}/getLeadbyTeamLeaderidandwithstatus`,
+                { assign_to_agent }
+            );
+            const filteredLeads = response?.data?.lead?.filter(lead => lead?.type === 'excel');
+            setdata(filteredLeads);
+            setSearch(filteredLeads);
+        } catch (error) {
+            if (error.response) {
+                console.log("Server responded with a non-success status:", error.response.status);
+                console.log("Response data:", error.response.data);
+            } else if (error.request) {
+                console.log("No response received from the server");
+            } else {
+                console.log("Error during request setup:", error.message);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const setUserIdAndRole = async () => {
+        try {
+            const userToken = await AsyncStorage.getItem('user_id');
+            const userRole = await AsyncStorage.getItem('role');
+            if (userToken) {
+                setAuthenticated(userToken);
+            }
+            if (userRole) {
+                setRole(userRole);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await setUserIdAndRole();
+        };
+        fetchData();
+        const onFocus = navigation.addListener('focus', () => {
+            setRefreshFlag((prevFlag) => !prevFlag);
+        });
+        return () => {
+            onFocus();
+        };
+    }, [navigation, refreshFlag]);
+
     const loadMoreLeads = () => {
         setVisibleDataCount(prevCount => prevCount + 10);
     }
 
     useEffect(() => {
-        getAllLead();
+        if (role === "admin") {
+            getAllLead();
+        }
+        if (role === "TeamLeader") {
+            getAllLeadByTeamLeader(isAuthenticated);
+        }
+        else {
+            getAllLeadByAgent(isAuthenticated);
+        }
     }, [role, isAuthenticated, refreshFlag]);
 
-    // const FollowupLeads = leadId => {
-    //     navigation.navigate('EditFollowup', { leadId });
-    // };
 
     return (
         <View style={styles.container}>
@@ -487,30 +569,29 @@ const UnAssignedLeads = () => {
                                                                             </Text>
                                                                         </Text>
                                                                     </View>
-                                                                    {daata?.followup_date ?
-                                                                        (
-                                                                            <View style={styles.cardRowT}>
-                                                                                <Image
-                                                                                    source={require('../assets/images/person.png')}
-                                                                                    style={styles.iconT}
-                                                                                />
-                                                                                <Text style={styles.cardTxtIV}>
-                                                                                    {daata?.agent_details['0']?.agent_name}
-                                                                                </Text>
-                                                                                <Image
-                                                                                    source={require('../assets/images/alarm.png')}
-                                                                                    style={styles.iconT}
-                                                                                />
-                                                                                <Text style={styles.cardTxtT}>
-                                                                                    { }
-                                                                                    {datatime.split('T')['0'] +
-                                                                                        ' ' +
-                                                                                        datatime.split('T')['1'].split('.')['0']}
-                                                                                </Text>
-                                                                            </View>
-                                                                        ) : (
-                                                                            <View></View>
-                                                                        )}
+                                                                    {daata?.followup_date ? (
+                                                                        <View style={styles.cardRowT}>
+                                                                            <Image
+                                                                                source={require('../assets/images/person.png')}
+                                                                                style={styles.iconT}
+                                                                            />
+                                                                            <Text style={styles.cardTxtIV}>
+                                                                                {daata?.agent_details['0']?.agent_name}
+                                                                            </Text>
+                                                                            <Image
+                                                                                source={require('../assets/images/alarm.png')}
+                                                                                style={styles.iconT}
+                                                                            />
+                                                                            <Text style={styles.cardTxtT}>
+                                                                                { }
+                                                                                {datatime.split('T')['0'] +
+                                                                                    ' ' +
+                                                                                    datatime.split('T')['1'].split('.')['0']}
+                                                                            </Text>
+                                                                        </View>
+                                                                    ) : (
+                                                                        <View></View>
+                                                                    )}
                                                                 </View>
                                                             </TouchableOpacity>
                                                         </View>
@@ -520,6 +601,7 @@ const UnAssignedLeads = () => {
                                     </View>
                                 </>
                             )}
+
                             {data && data.length > visibleDataCount && (
                                 <View style={[styles.loadMoreContainer, { marginBottom: 80 }]}>
                                     <TouchableOpacity style={styles.loadMoreButton} onPress={loadMoreLeads}>
@@ -560,18 +642,6 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "#fff",
     },
-    notData: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    notDataTxt: {
-        fontSize: 16,
-        fontWeight: '600',
-        color: '#222',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     loaderContainer: {
         flex: 1,
         justifyContent: 'center',
@@ -592,10 +662,20 @@ const styles = StyleSheet.create({
         elevation: 5,
         borderRadius: 5,
     },
+    notData: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    notDataTxt: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#222',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
         flex: 1,
-        height: '100%',
-        width: '100%',
         backgroundColor: '#fff',
     },
     mainContainer: {
@@ -931,4 +1011,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default UnAssignedLeads;
+export default ImportedLead

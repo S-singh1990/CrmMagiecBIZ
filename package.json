@@ -25,6 +25,7 @@
     "axios": "^1.6.2",
     "deprecated-react-native-listview": "^0.0.9",
     "link": "^2.1.0",
+    "moment": "^2.30.1",
     "react": "18.2.0",
     "react-big-calendar": "^1.11.1",
     "react-chartjs-2": "^5.2.0",

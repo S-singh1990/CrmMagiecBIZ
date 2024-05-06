@@ -58,9 +58,7 @@ const CustomDrawer = (props) => {
     };
 
     useEffect(() => {
-        // Call function to retrieve user role from AsyncStorage
         setRoleFromStorage();
-
     }, []);
 
     const navigateToScreen = async (screenName) => {
@@ -135,6 +133,12 @@ const CustomDrawer = (props) => {
                         <View style={styles.drawerTab}>
                             <Ionicons name="layers-outline" size={20} style={styles.drawerTabIcon} />
                             <Text style={styles.drawerTabTxt}>Followup Lead's</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigateToScreen('ImportedLead')}>
+                        <View style={styles.drawerTab}>
+                            <Ionicons name="layers-outline" size={20} style={styles.drawerTabIcon} />
+                            <Text style={styles.drawerTabTxt}>Imported Lead's</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigateToScreen('CallLog')}>

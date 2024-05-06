@@ -41,7 +41,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-
     const fetchData = async () => {
       await getDeviceToken();
       await setUserIdAndRole();
@@ -56,10 +55,12 @@ const Home = () => {
         DashboardLeadCountOfUserByTeamLeader();
         const userId = await AsyncStorage.getItem('user_id');
         getAllAgentWithData({ assign_to_agent: userId });
+        getAllLead2({ assign_to_agent: userId });
       } else {
         DashboardLeadCountOfUser();
         const userId = await AsyncStorage.getItem('user_id');
         getAllAgent({ assign_to_agent: userId });
+        getAllLead2({ assign_to_agent: userId });
       }
       await updateToken();
     };
@@ -268,7 +269,7 @@ const Home = () => {
 
   const getAllLead2 = async (assign_to_agent) => {
     try {
-      const response = await axios.post(`${PROCESS_KEY}/getAllNewLeadBYAgentId`, { assign_to_agent });
+      const response = await axios.post(`${PROCESS_KEY}/getAllNewLeadBYAgentId`, { assign_to_agent: isAuthenticated }, { headers: { "Content-Type": "application/json" } });
       setdata(response?.data?.lead);
     } catch (error) {
       console.log(error);
@@ -302,7 +303,7 @@ const Home = () => {
                       <Text style={styles.newLeadHead}>Lead</Text>
                     </View>
                     <View style={styles.CenterInT}>
-                      <Text style={styles.newLeadSubhead}>{data.length !== 0 ? data.length : 0}</Text>
+                      <Text style={styles.newLeadSubhead}>{data?.length !== 0 ? data.length : 0}</Text>
                     </View>
                   </View>
                 </View>
