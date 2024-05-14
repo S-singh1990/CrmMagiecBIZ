@@ -196,6 +196,8 @@ const Analytics = () => {
                                     <View style={styles.btnCalender}>
                                         <TouchableOpacity onPress={showDatePicker} style={styles.btnDate}>
                                             <TextInput
+                                                placeholderTextColor="#9e9e9e"
+                                                style={{ color: '#000' }}
                                                 placeholder="Select From Date"
                                                 value={inputDate}
                                                 editable={false}
@@ -211,6 +213,8 @@ const Analytics = () => {
                                     <View style={styles.btnCalender}>
                                         <TouchableOpacity onPress={showDatePicker1} style={styles.btnDate}>
                                             <TextInput
+                                                placeholderTextColor="#9e9e9e"
+                                                style={{ color: '#000' }}
                                                 placeholder="Select To Date"
                                                 value={inputDate1}
                                                 editable={false}

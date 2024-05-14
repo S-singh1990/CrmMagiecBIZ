@@ -317,6 +317,7 @@ const AnalyticReport = () => {
                                         selectedTextStyle={styles.selectedTextStyle}
                                         inputSearchStyle={styles.inputSearchStyle}
                                         iconStyle={styles.iconStyle}
+                                        itemTextStyle={{ color: '#9e9e9e' }}
                                         data={agent}
                                         search
                                         maxHeight={300}
@@ -341,6 +342,8 @@ const AnalyticReport = () => {
                                     <View style={styles.btnCalender}>
                                         <TouchableOpacity onPress={showDatePicker} style={styles.btnDate}>
                                             <TextInput
+                                                placeholderTextColor="#9e9e9e"
+                                                style={{ color: '#000' }}
                                                 placeholder="Select From Date"
                                                 value={inputDate}
                                                 editable={false}
@@ -356,6 +359,8 @@ const AnalyticReport = () => {
                                     <View style={styles.btnCalender}>
                                         <TouchableOpacity onPress={showDatePicker1} style={styles.btnDate}>
                                             <TextInput
+                                                placeholderTextColor="#9e9e9e"
+                                                style={{ color: '#000' }}
                                                 placeholder="Select To Date"
                                                 value={inputDate1}
                                                 editable={false}
@@ -447,14 +452,12 @@ const AnalyticReport = () => {
                                     <View style={styles.cardRowS}>
                                         <Image source={require('../assets/images/call.png')} style={styles.iconS} />
                                         <Text style={styles.cardTxtS}>
-
                                             {alldata ? alldata['0'].totalIncommingCall : 'N/A'}
                                         </Text>
                                     </View>
                                     <View style={styles.cardRowT}>
                                         <Image source={require('../assets/images/alarm.png')} style={styles.iconT} />
                                         <Text style={styles.cardTxtT}>
-
                                             {alldata ? alldata['0'].totalIncommingDuration : 'N/A'}
                                         </Text>
                                     </View>
@@ -858,6 +861,28 @@ const styles = StyleSheet.create({
         fontFamily: "regular",
         marginTop: moderateScale(3),
         marginBottom: moderateScale(5),
+    },
+    label: {
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: 22,
+        top: 8,
+        zIndex: 999,
+        paddingHorizontal: 8,
+        fontSize: 14,
+    },
+    placeholderStyle: {
+        fontSize: 14,
+        color: '#9e9e9e'
+    },
+    selectedTextStyle: {
+        fontSize: 14,
+        color: '#9e9e9e'
+    },
+    inputSearchStyle: {
+        height: 40,
+        fontSize: 14,
+        color: '#9e9e9e'
     },
 
 })

@@ -313,7 +313,6 @@ const Home = () => {
               </TouchableOpacity>
             </View>
 
-
             <View style={styles.newLead}>
               {role === 'admin' ? (
                 <TouchableOpacity

@@ -33,8 +33,9 @@ const CustomTextInput = ({
                     onChangeText(txt);
                 }}
                 value={value}
-                style={{ width: '100%' }}
+                style={{ width: '100%', color: '#000' }}
                 placeholder={placeholder}
+                placeholderTextColor="#9e9e9e"
             />
         </View>
     )

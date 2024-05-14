@@ -513,7 +513,7 @@ const AddLead = () => {
                     },
                 });
                 const result = await response.json();
-                console.log('result', result)
+                // console.log('result', result)
                 if (result.success === true) {
                     const agentList = result?.agent.map(agent111 => ({
                         label: agent111.agent_name,
@@ -583,19 +583,21 @@ const AddLead = () => {
                             multiline={true}
                             numberOfLines={5}
                             value={data1.full_address}
-                            style={[styles.inputStyle, { height: 70, textAlignVertical: 'top', }]}
                             onChangeText={(text) => handleInputChange('full_address', text)}
+                            placeholderTextColor="#9e9e9e"
+                            style={[styles.inputStyle, { height: 70, textAlignVertical: 'top', color: '#000' }]}
                         />
                     </View>
 
                     <View style={styles.FrameDtime}>
                         <View style={styles.btnCalender}>
                             <Dropdown
-                                style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
+                                style={[styles.dropdown, isFocus && { borderColor: '#c02221', color: '#000' }]}
                                 placeholderStyle={styles.placeholderStyle}
                                 selectedTextStyle={styles.selectedTextStyle}
                                 inputSearchStyle={styles.inputSearchStyle}
                                 iconStyle={styles.iconStyle}
+                                itemTextStyle={{ color: '#9e9e9e' }}
                                 data={country}
                                 search
                                 maxHeight={300}
@@ -607,15 +609,18 @@ const AddLead = () => {
                                 onFocus={() => setIsFocus(true)}
                                 onBlur={() => setIsFocus(false)}
                                 onChange={(item) => getshortcountry(item)}
+                                placeholderTextColor="#9e9e9e"
                             />
                         </View>
                         <View style={styles.btnCalender}>
                             <Dropdown
                                 style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
+                                placeholderTextColor="#9e9e9e"
                                 placeholderStyle={styles.placeholderStyle}
                                 selectedTextStyle={styles.selectedTextStyle}
                                 inputSearchStyle={styles.inputSearchStyle}
                                 iconStyle={styles.iconStyle}
+                                itemTextStyle={{ color: '#9e9e9e' }}
                                 data={state}
                                 search
                                 maxHeight={300}
@@ -638,7 +643,8 @@ const AddLead = () => {
                         <View style={styles.btnCalender}>
                             <TextInput
                                 placeholder="PinCode"
-                                style={styles.inputStyle}
+                                placeholderTextColor="#9e9e9e"
+                                style={[styles.inputStyle, { color: '#000' }]}
                                 value={data1.pincode}
                                 onChangeText={(text) => handleInputChange('pincode', text)}
                             />
@@ -646,7 +652,8 @@ const AddLead = () => {
                         <View style={styles.btnCalender}>
                             <TextInput
                                 placeholder="Lead Cost"
-                                style={styles.inputStyle}
+                                placeholderTextColor="#9e9e9e"
+                                style={[styles.inputStyle, { color: '#000' }]}
                                 value={data1.lead_cost}
                                 onChangeText={(text) => handleInputChange('lead_cost', text)}
                             />
@@ -677,7 +684,8 @@ const AddLead = () => {
                                         <View style={styles.btnCalender}>
                                             <TextInput
                                                 placeholder="Full Name *"
-                                                style={styles.inputStyle}
+                                                placeholderTextColor="#9e9e9e"
+                                                style={[styles.inputStyle, { color: '#000' }]}
                                                 value={data1.full_name}
                                                 onChangeText={(text) => handleInputChange('full_name', text)}
                                             />
@@ -686,7 +694,8 @@ const AddLead = () => {
                                         <View style={styles.btnCalender}>
                                             <TextInput
                                                 placeholder="Email Id"
-                                                style={styles.inputStyle}
+                                                placeholderTextColor="#9e9e9e"
+                                                style={[styles.inputStyle, { color: '#000' }]}
                                                 value={data1.email_id}
                                                 onChangeText={(text) => handleInputChange('email_id', text)}
                                             />
@@ -696,7 +705,8 @@ const AddLead = () => {
                                     <View style={styles.FrameInput}>
                                         <TextInput
                                             placeholder="Contact No. *"
-                                            style={styles.inputStyle}
+                                            placeholderTextColor="#9e9e9e"
+                                            style={[styles.inputStyle, { color: '#000' }]}
                                             keyboardType="numeric"  // Set keyboardType to 'numeric'
                                             value={data1.contact_no}
                                             onChangeText={handleContact}
@@ -709,11 +719,13 @@ const AddLead = () => {
                                         <View style={styles.btnCalender}>
                                             <Dropdown
                                                 style={styles.dropdown}
+                                                placeholderTextColor="#9e9e9e"
                                                 // style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                                 placeholderStyle={styles.placeholderStyle}
                                                 selectedTextStyle={styles.selectedTextStyle}
                                                 inputSearchStyle={styles.inputSearchStyle}
                                                 iconStyle={styles.iconStyle}
+                                                itemTextStyle={{ color: '#9e9e9e' }}
                                                 data={agent}
                                                 search
                                                 maxHeight={300}
@@ -739,6 +751,7 @@ const AddLead = () => {
                                                 selectedTextStyle={styles.selectedTextStyle}
                                                 inputSearchStyle={styles.inputSearchStyle}
                                                 iconStyle={styles.iconStyle}
+                                                itemTextStyle={{ color: '#9e9e9e' }}
                                                 data={status}
                                                 search
                                                 maxHeight={300}
@@ -762,11 +775,13 @@ const AddLead = () => {
                                         <View style={styles.btnCalender}>
                                             <Dropdown
                                                 style={styles.dropdown}
+                                                placeholderTextColor="#9e9e9e"
                                                 // style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                                 placeholderStyle={styles.placeholderStyle}
                                                 selectedTextStyle={styles.selectedTextStyle}
                                                 inputSearchStyle={styles.inputSearchStyle}
                                                 iconStyle={styles.iconStyle}
+                                                itemTextStyle={{ color: '#9e9e9e' }}
                                                 data={services}
                                                 search
                                                 maxHeight={300}
@@ -788,11 +803,13 @@ const AddLead = () => {
                                         <View style={styles.btnCalender}>
                                             <Dropdown
                                                 style={styles.dropdown}
+                                                placeholderTextColor="#9e9e9e"
                                                 // style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
                                                 placeholderStyle={styles.placeholderStyle}
                                                 selectedTextStyle={styles.selectedTextStyle}
                                                 inputSearchStyle={styles.inputSearchStyle}
                                                 iconStyle={styles.iconStyle}
+                                                itemTextStyle={{ color: '#9e9e9e' }}
                                                 data={leadsource}
                                                 search
                                                 maxHeight={300}
@@ -819,7 +836,8 @@ const AddLead = () => {
                                             multiline={true}
                                             numberOfLines={5}
                                             value={data1.description}
-                                            style={[styles.inputStyle, { height: 70, textAlignVertical: 'top', }]}
+                                            placeholderTextColor="#9e9e9e"
+                                            style={[styles.inputStyle, { height: 70, textAlignVertical: 'top', color: '#000' }]}
                                             onChangeText={(text) => handleInputChange('description', text)}
                                         />
                                     </View>
@@ -838,6 +856,8 @@ const AddLead = () => {
                                                     placeholder="Select Date"
                                                     value={inputDate}
                                                     editable={false}
+                                                    placeholderTextColor="#9e9e9e"
+                                                    style={{ color: '#000' }}
                                                 />
                                                 <DateTimePickerModal
                                                     isVisible={isDatePickerVisible}
@@ -853,6 +873,8 @@ const AddLead = () => {
                                                     placeholder="Select Time"
                                                     value={inputTime}
                                                     editable={false}
+                                                    placeholderTextColor="#9e9e9e"
+                                                    style={{ color: '#000' }}
                                                 />
                                                 <DateTimePickerModal
                                                     isVisible={isTimePickerVisible}
@@ -1078,15 +1100,21 @@ const styles = StyleSheet.create({
     },
     placeholderStyle: {
         fontSize: 14,
+        color: '#9e9e9e',
     },
     selectedTextStyle: {
         fontSize: 14,
+        color: '#000',
+        color: '#9e9e9e',
     },
     inputSearchStyle: {
         height: 40,
         fontSize: 14,
+        color: '#9e9e9e'
     },
-
+    searchPlaceholder: {
+        color: '#9e9e9e'
+    },
     btnCalender: {
         width: '48.5%',
         marginRight: 10,

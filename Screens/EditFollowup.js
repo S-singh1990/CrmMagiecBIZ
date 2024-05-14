@@ -858,13 +858,15 @@ const EditFollowup = () => {
                                             <View style={styles.FrameDtime}>
                                                 <View style={styles.btnCalender}>
                                                     <TextInput
-                                                        style={styles.inputStyle}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         value={leaddetails['0']?.full_name}
                                                     />
                                                 </View>
                                                 <View style={styles.btnCalender}>
                                                     <TextInput
-                                                        style={styles.inputStyle}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         value={leaddetails['0']?.email_id}
                                                     />
                                                 </View>
@@ -872,14 +874,16 @@ const EditFollowup = () => {
                                             <View style={styles.FrameDtime}>
                                                 <View style={styles.btnCalender}>
                                                     <TextInput
-                                                        style={styles.inputStyle}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         value={String(leaddetails['0']?.contact_no)}
                                                     />
                                                 </View>
                                                 <View style={styles.btnCalender}>
                                                     <TextInput
                                                         placeholder="Alternative No."
-                                                        style={styles.inputStyle}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         value={leaddetails['0']?.alternative_no}
                                                     />
                                                 </View>
@@ -888,14 +892,16 @@ const EditFollowup = () => {
                                                 <View style={styles.btnCalender}>
                                                     <TextInput
                                                         placeholder="Company Name"
-                                                        style={styles.inputStyle}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         value={leaddetails['0']?.company_name}
                                                     />
                                                 </View>
                                                 <View style={styles.btnCalender}>
                                                     <TextInput
                                                         placeholder="Website"
-                                                        style={styles.inputStyle}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         value={leaddetails['0']?.website}
                                                     />
                                                 </View>
@@ -904,26 +910,27 @@ const EditFollowup = () => {
                                                 <View style={styles.btnCalender}>
                                                     <TextInput
                                                         placeholder="Position"
-                                                        style={styles.inputStyle}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         value={leaddetails['0']?.position}
                                                     />
                                                 </View>
                                                 <View style={styles.btnCalender}>
                                                     <TextInput
                                                         placeholder="Lead Cost"
-                                                        style={styles.inputStyle}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         value={leaddetails['0']?.lead_cost}
                                                     />
                                                 </View>
                                             </View>
-                                            <View>
+                                            {/* <View>
                                                 <TouchableOpacity
                                                     style={styles.btnLog}
-                                                // onPress={submitLead}
                                                 >
                                                     <Text style={styles.btnLogtx}>Submit</Text>
                                                 </TouchableOpacity>
-                                            </View>
+                                            </View> */}
                                         </View>
                                     </View>
                                 </View>
@@ -969,20 +976,23 @@ const EditFollowup = () => {
                                             <View style={styles.FrameInput}>
                                                 <TextInput
                                                     placeholder="Full Address"
+                                                    placeholderTextColor="#9e9e9e"
                                                     multiline={true}
                                                     numberOfLines={5}
                                                     value={data1.full_address}
-                                                    style={[styles.inputStyle, { height: 70, textAlignVertical: 'top', }]}
+                                                    style={[styles.inputStyle, { height: 70, textAlignVertical: 'top', color: '#000' }]}
                                                 />
                                             </View>
                                             <View style={styles.FrameDtime}>
                                                 <View style={styles.btnCalender}>
                                                     <Dropdown
-                                                        style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.dropdown, isFocus && { borderColor: '#c02221', color: '#000' }]}
                                                         placeholderStyle={styles.placeholderStyle}
                                                         selectedTextStyle={styles.selectedTextStyle}
                                                         inputSearchStyle={styles.inputSearchStyle}
                                                         iconStyle={styles.iconStyle}
+                                                        itemTextStyle={{ color: '#9e9e9e' }}
                                                         data={country}
                                                         search
                                                         maxHeight={300}
@@ -998,11 +1008,13 @@ const EditFollowup = () => {
                                                 </View>
                                                 <View style={styles.btnCalender}>
                                                     <Dropdown
-                                                        style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.dropdown, isFocus && { borderColor: '#c02221', color: '#000' }]}
                                                         placeholderStyle={styles.placeholderStyle}
                                                         selectedTextStyle={styles.selectedTextStyle}
                                                         inputSearchStyle={styles.inputSearchStyle}
                                                         iconStyle={styles.iconStyle}
+                                                        itemTextStyle={{ color: '#9e9e9e' }}
                                                         data={state}
                                                         search
                                                         maxHeight={300}
@@ -1024,26 +1036,27 @@ const EditFollowup = () => {
                                                 <View style={styles.btnCalender}>
                                                     <TextInput
                                                         placeholder="city"
-                                                        style={styles.inputStyle}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         value={leaddetails['0']?.city}
                                                     />
                                                 </View>
                                                 <View style={styles.btnCalender}>
                                                     <TextInput
                                                         placeholder="pincode"
-                                                        style={styles.inputStyle}
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         value={leaddetails['0']?.pincode}
                                                     />
                                                 </View>
                                             </View>
-                                            <View>
+                                            {/* <View>
                                                 <TouchableOpacity
                                                     style={styles.btnLog}
-                                                // onPress={submitLead}
                                                 >
                                                     <Text style={styles.btnLogtx}>Submit</Text>
                                                 </TouchableOpacity>
-                                            </View>
+                                            </View> */}
                                         </View>
                                     </View>
                                 </View>
@@ -1134,28 +1147,31 @@ const EditFollowup = () => {
                                             <View style={styles.FrameInput}>
                                                 <Text style={styles.inputLable}>Enter Message</Text>
                                                 <TextInput
+                                                    placeholderTextColor="#9e9e9e"
                                                     placeholder="Enter Message"
                                                     multiline={true}
                                                     onChangeText={(text) => EnterMessage({ nativeEvent: { text } })}
                                                     numberOfLines={10}
-                                                    style={[styles.inputStyle, { height: 100, textAlignVertical: 'top', }]}
+                                                    style={[styles.inputStyle, { height: 100, textAlignVertical: 'top', color: '#000' }]}
                                                 />
                                             </View>
                                             <View style={styles.FrameDtime}>
                                                 <View style={styles.btnCalender}>
                                                     <Text style={styles.inputLable}>Characters</Text>
                                                     <TextInput
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         placeholder="Characters"
                                                         value={String(carecters)}
-                                                        style={styles.inputStyle}
                                                     />
                                                 </View>
                                                 <View style={styles.btnCalender}>
                                                     <Text style={styles.inputLable}>No of SMS</Text>
                                                     <TextInput
+                                                        placeholderTextColor="#9e9e9e"
+                                                        style={[styles.inputStyle, { color: '#000' }]}
                                                         placeholder="No. of SMS"
                                                         value={String(row)}
-                                                        style={styles.inputStyle}
                                                     />
                                                 </View>
                                             </View>
@@ -1254,7 +1270,8 @@ const EditFollowup = () => {
                                         multiline={true}
                                         numberOfLines={4}
                                         value={data1.followup_desc}
-                                        style={[styles.inputStyle, { height: 50, textAlignVertical: 'top', }]}
+                                        style={[styles.inputStyle, { height: 50, textAlignVertical: 'top', color: '#000' }]}
+                                        placeholderTextColor="#9e9e9e"
                                         onChangeText={(text) => handleInputChange('followup_desc', text)}
                                     />
                                     {commentError ? <Text style={styles.errorText}>{commentError}</Text> : null}
@@ -1270,11 +1287,12 @@ const EditFollowup = () => {
                                 <View style={styles.FrameInput}>
                                     {(role === 'admin' || role === 'TeamLeader') ? (
                                         <Dropdown
-                                            style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
+                                            style={[styles.dropdown, isFocus && { borderColor: '#c02221', color: '#000' }]}
                                             placeholderStyle={styles.placeholderStyle}
                                             selectedTextStyle={styles.selectedTextStyle}
                                             inputSearchStyle={styles.inputSearchStyle}
                                             iconStyle={styles.iconStyle}
+                                            itemTextStyle={{ color: '#9e9e9e' }}
                                             data={agent}
                                             search
                                             maxHeight={300}
@@ -1296,12 +1314,14 @@ const EditFollowup = () => {
                                         />
                                     ) : (
                                         <Dropdown
+                                            placeholderTextColor="#9e9e9e"
                                             style={styles.dropdown}
                                             disable
                                             placeholderStyle={styles.placeholderStyle}
                                             selectedTextStyle={styles.selectedTextStyle}
                                             inputSearchStyle={styles.inputSearchStyle}
                                             iconStyle={styles.iconStyle}
+                                            itemTextStyle={{ color: '#9e9e9e' }}
                                             data={agent}
                                             search
                                             maxHeight={300}
@@ -1352,11 +1372,13 @@ const EditFollowup = () => {
 
                                 <View style={styles.FrameInput}>
                                     <Dropdown
-                                        style={[styles.dropdown, isFocus && { borderColor: '#c02221' }]}
+                                        placeholderTextColor="#9e9e9e"
+                                        style={[styles.dropdown, isFocus && { borderColor: '#c02221', color: '#000' }]}
                                         placeholderStyle={styles.placeholderStyle}
                                         selectedTextStyle={styles.selectedTextStyle}
                                         inputSearchStyle={styles.inputSearchStyle}
                                         iconStyle={styles.iconStyle}
+                                        itemTextStyle={{ color: '#9e9e9e' }}
                                         data={status}
                                         search
                                         maxHeight={300}
@@ -1387,7 +1409,8 @@ const EditFollowup = () => {
                                             multiline={true}
                                             numberOfLines={5}
                                             value={data1.followup_won_amount}
-                                            style={[styles.inputStyle, { textAlignVertical: 'top' }]}
+                                            placeholderTextColor="#9e9e9e"
+                                            style={[styles.inputStyle, { textAlignVertical: 'top', color: '#000' }]}
                                             onChangeText={(text) => handleInputChange('followup_won_amount', text)}
                                         />
                                     </View>
@@ -1400,6 +1423,8 @@ const EditFollowup = () => {
                                                 placeholder="Select Date"
                                                 value={inputDate}
                                                 editable={false}
+                                                placeholderTextColor="#9e9e9e"
+                                                style={{ color: '#000' }}
                                             />
                                             <DateTimePickerModal
                                                 isVisible={isDatePickerVisible}
@@ -1417,6 +1442,8 @@ const EditFollowup = () => {
                                                 placeholder="Select Time"
                                                 value={inputTime}
                                                 editable={false}
+                                                placeholderTextColor="#9e9e9e"
+                                                style={{ color: '#000' }}
                                             />
                                             <DateTimePickerModal
                                                 isVisible={isTimePickerVisible}
@@ -1683,6 +1710,7 @@ const styles = StyleSheet.create({
         fontFamily: "regular",
         marginTop: moderateScale(8),
         marginBottom: moderateScale(8),
+        color: '#9e9e9e',
     },
     label: {
         position: 'absolute',
@@ -1695,22 +1723,23 @@ const styles = StyleSheet.create({
     },
     placeholderStyle: {
         fontSize: 14,
+        color: '#9e9e9e'
     },
     selectedTextStyle: {
         fontSize: 14,
+        color: '#9e9e9e'
     },
     inputSearchStyle: {
         height: 40,
         fontSize: 14,
+        color: '#9e9e9e'
     },
-
     btnCalender: {
         width: '48%',
         marginRight: 10,
         marginTop: moderateScale(8),
         marginBottom: moderateScale(8),
     },
-
     btnDate: {
         width: '100%',
         alignItems: 'center',

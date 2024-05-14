@@ -44,7 +44,6 @@ const AllCalls = () => {
                     const callLogData = await CallLogs.load(250);
                     setListData(callLogData);
                     const callLog = callLogData;
-
                     if (isAuthenticated) {
                         await handleCallLog(callLog)
                     }

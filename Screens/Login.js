@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native'
 import CustomAlert from "../Components/CustomAlert";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PROCESS_KEY } from "@env";
+import { color } from "react-native-reanimated";
+import CustomTextPasswordInput from "../Components/CustomTextPasswordInput";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -105,13 +107,22 @@ const LoginScreen = () => {
         {badEmail !== '' && <Text style={styles.errorText}>{badEmail}</Text>}
 
         <Text style={styles.labels}>Password</Text>
-        <CustomTextInput
+        <CustomTextPasswordInput
           icon={require('../assets/images/lock-open.png')}
+          iconeye={require('../assets/images/eye-outline.png')}
+          iconeyeOff={require('../assets/images/eye-off-outline.png')}
           placeholder={'Enter Password'}
           value={password}
           onChangeText={txt => setPassword(txt)}
           isValid={badPassword === '' ? true : false}
         />
+        {/* <CustomTextInput
+          icon={require('../assets/images/lock-open.png')}
+          placeholder={'Enter Password'}
+          value={password}
+          onChangeText={txt => setPassword(txt)}
+          isValid={badPassword === '' ? true : false}
+        /> */}
         {badPassword !== '' && <Text style={styles.errorText}>{badPassword}</Text>}
 
         <Text style={styles.btnBtxt}>ForgotPassword</Text>
