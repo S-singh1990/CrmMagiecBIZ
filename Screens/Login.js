@@ -69,7 +69,7 @@ const LoginScreen = () => {
       body: JSON.stringify(body)
     });
     const result = await responce.json();
-    console.log('result', result);
+    // console.log('result', result);
     if (result.success === true) {
       // console.log('wer', result.agent)
       await AsyncStorage.setItem('user_id', result.agent._id);
@@ -117,12 +117,12 @@ const LoginScreen = () => {
           isValid={badPassword === '' ? true : false}
         />
         {/* <CustomTextInput
-          icon={require('../assets/images/lock-open.png')}
-          placeholder={'Enter Password'}
-          value={password}
-          onChangeText={txt => setPassword(txt)}
-          isValid={badPassword === '' ? true : false}
-        /> */}
+            icon={require('../assets/images/lock-open.png')}
+            placeholder={'Enter Password'}
+            value={password}
+            onChangeText={txt => setPassword(txt)}
+            isValid={badPassword === '' ? true : false}
+          /> */}
         {badPassword !== '' && <Text style={styles.errorText}>{badPassword}</Text>}
 
         <Text style={styles.btnBtxt}>ForgotPassword</Text>

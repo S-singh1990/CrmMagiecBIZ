@@ -176,8 +176,9 @@ const ScheduleEv = () => {
                                             style={{ width: 22, height: 22, marginRight: 5, opacity: 0.5, }}
                                         />
                                         <TextInput
-                                            style={{ width: '82%', }}
+                                            style={{ width: '82%', color: '#9e9e9e' }}
                                             placeholder={'Search here...'}
+                                            placeholderTextColor="#9e9e9e"
                                             value={searchtext}
                                             onChangeText={txt => {
                                                 onSearch(txt);

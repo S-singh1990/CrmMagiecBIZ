@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 20,
         textAlign: 'center',
+        color: '#9e9e9e'
     },
     okButton: {
         backgroundColor: '#c02221',

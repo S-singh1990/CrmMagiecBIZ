@@ -369,6 +369,8 @@ const NewLeads = () => {
                                                     selectedTextStyle={styles.selectedTextStyle}
                                                     inputSearchStyle={styles.inputSearchStyle}
                                                     iconStyle={styles.iconStyle}
+                                                    itemTextStyle={{ color: '#9e9e9e' }}
+                                                    placeholderTextColor="#9e9e9e"
                                                     data={agent}
                                                     search
                                                     maxHeight={300}
@@ -392,6 +394,8 @@ const NewLeads = () => {
                                                     selectedTextStyle={styles.selectedTextStyle}
                                                     inputSearchStyle={styles.inputSearchStyle}
                                                     iconStyle={styles.iconStyle}
+                                                    itemTextStyle={{ color: '#9e9e9e' }}
+                                                    placeholderTextColor="#9e9e9e"
                                                     data={status}
                                                     search
                                                     maxHeight={300}
@@ -430,6 +434,8 @@ const NewLeads = () => {
                                                     selectedTextStyle={styles.selectedTextStyle}
                                                     inputSearchStyle={styles.inputSearchStyle}
                                                     iconStyle={styles.iconStyle}
+                                                    itemTextStyle={{ color: '#9e9e9e' }}
+                                                    placeholderTextColor="#9e9e9e"
                                                     data={status}
                                                     search
                                                     maxHeight={300}
@@ -466,8 +472,9 @@ const NewLeads = () => {
                                         style={{ width: 22, height: 22, marginRight: 5, opacity: 0.5 }}
                                     />
                                     <TextInput
-                                        style={{ width: '82%' }}
+                                        style={{ width: '82%', color: '#9e9e9e' }}
                                         placeholder={'Search here...'}
+                                        placeholderTextColor="#9e9e9e"
                                         value={searchtext}
                                         onChangeText={txt => {
                                             onSearch(txt);
@@ -911,13 +918,19 @@ const styles = StyleSheet.create({
     },
     placeholderStyle: {
         fontSize: 14,
+        color: '#9e9e9e',
     },
     selectedTextStyle: {
         fontSize: 14,
+        color: '#9e9e9e',
     },
     inputSearchStyle: {
         height: 40,
         fontSize: 14,
+        color: '#9e9e9e',
+    },
+    searchPlaceholder: {
+        color: '#9e9e9e'
     },
     btnContainer: {
         width: '100%',
