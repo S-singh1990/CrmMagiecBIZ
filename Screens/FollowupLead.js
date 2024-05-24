@@ -255,7 +255,7 @@ const FollowupLead = ({ daata }) => {
     }
 
     const onSearch = (text) => {
-        console.warn(text)
+        // console.warn(text)
         setsearchtext(text);
         if (!text == '') {
             setdata(search);
@@ -273,6 +273,9 @@ const FollowupLead = ({ daata }) => {
                         .match(text.toLowerCase()) ||
                     Item?.status_details[0]?.status_name
                         .toLowerCase()
+                        .match(text.toLowerCase()) ||
+                    Item?.contact_no
+                        .toLowerCase()
                         .match(text.toLowerCase())
                 );
             });
@@ -282,13 +285,9 @@ const FollowupLead = ({ daata }) => {
             setdata(search)
         }
     }
-
-
     useEffect(() => {
 
-
     }, [search]);
-
 
     const ClearText = async () => {
         setsearchtext('')

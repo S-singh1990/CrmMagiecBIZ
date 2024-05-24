@@ -270,6 +270,9 @@ const NewLeads = () => {
                         .match(text.toLowerCase()) ||
                     Item?.status_details[0]?.status_name
                         .toLowerCase()
+                        .match(text.toLowerCase()) ||
+                    Item?.contact_no
+                        .toLowerCase()
                         .match(text.toLowerCase())
                 );
             });

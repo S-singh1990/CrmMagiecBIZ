@@ -64,7 +64,6 @@ const StackNav = () => {
           .toLowerCase()
           .match(text.toLowerCase())
       );
-
     });
     setdata(tempList)
     // }
